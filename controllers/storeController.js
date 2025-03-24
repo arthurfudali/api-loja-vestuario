@@ -76,3 +76,5 @@ const getAllItems = async (req, res) => {
       res.sendStatus(500); // Erro interno do servidor
     }
   };
+
+  export default { getAllItems, createItem, deleteItem, updateItem, getOneItem };
