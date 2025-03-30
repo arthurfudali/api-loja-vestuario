@@ -3,7 +3,7 @@ const swaggerOptions = {
   swaggerDefinition: {
     openapi: "3.0.0",
     info: {
-      title: "API - Loja Vesturaio",
+      title: "API - Loja Vestuário",
       description: "API para loja de roupas",
       version: "1.0.0",
     },
@@ -18,7 +18,7 @@ const swaggerOptions = {
       },
     ],
   },
-  apis: ["./routes/*.js", "./docs/swaggerDocs.yaml"], // files containing annotations as above
+  apis: ["./routes/*.js", "./docs/swaggerDocs.yaml",  "./controllers/*.js"], // Caminho para os arquivos que contêm as anotações Swagger
 };
 
 export default swaggerOptions;
