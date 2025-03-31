@@ -1,6 +1,7 @@
 import express from "express";
 const storeRoutes = express.Router();
 import storeController from "../controllers/storeController.js";
+import Auth from "../middleware/Auth.js";
 
 /**
  * @swagger
@@ -16,7 +17,7 @@ import storeController from "../controllers/storeController.js";
  *               type: array
  *               items:
  *                 type: object
- *                 properties:        
+ *                 properties:
  *                   name:
  *                     type: string
  *                     example: Camiseta Chicago Bulls Essential Masculina
@@ -41,7 +42,7 @@ import storeController from "../controllers/storeController.js";
  *                       brand:
  *                         type: string
  *                         example: Nike
- *                       madeIn:   
+ *                       madeIn:
  *                         type: string
  *                         example: Vietnã
  *       500:
@@ -55,61 +56,61 @@ import storeController from "../controllers/storeController.js";
  *                   type: string
  *                   example: Erro interno do servidor.
  */
-storeRoutes.get("/clothes", storeController.getAllItems);
+storeRoutes.get("/clothes", Auth.Authorization, storeController.getAllItems);
 /**
-*  @swagger
-*  /clothes:
-*    post:
-*      summary: Cadastrar uma nova roupa
-*      requestBody:
-*        required: true
-*        content:
-*         application/json:
-*           schema:
-*             type: object
-*             properties:
-*               name:
-*                 type: string
-*                 example: Camiseta Chicago Bulls Essential Masculina
-*               type:
-*                 type: string
-*                 example: Camiseta
-*               price:
-*                 type: number
-*                 example: 218.49
-*               description:
-*                 type: object
-*                 properties:
-*                   size:
-*                     type: string
-*                     example: M
-*                   color:
-*                     type: string
-*                     example: Vermelho
-*                   material:
-*                     type: string
-*                     example: Algodão
-*                   brand:
-*                     type: string
-*                     example: Nike
-*                   madeIn:   
-*                     type: string
-*                     example: Vietnã
-*      responses:
-*       201:
-*         description: Roupa cadastrada com sucesso
-*       500:
-*         description: Erro interno do servidor
-*         content:
-*           application/json:
-*             schema:
-*               type: object
-*               properties:
-*                 error:
-*                   type: string
-*                   example: Erro interno do servidor.
-*/
-storeRoutes.post("/clothes", storeController.createItem);
+ *  @swagger
+ *  /clothes:
+ *    post:
+ *      summary: Cadastrar uma nova roupa
+ *      requestBody:
+ *        required: true
+ *        content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *                 example: Camiseta Chicago Bulls Essential Masculina
+ *               type:
+ *                 type: string
+ *                 example: Camiseta
+ *               price:
+ *                 type: number
+ *                 example: 218.49
+ *               description:
+ *                 type: object
+ *                 properties:
+ *                   size:
+ *                     type: string
+ *                     example: M
+ *                   color:
+ *                     type: string
+ *                     example: Vermelho
+ *                   material:
+ *                     type: string
+ *                     example: Algodão
+ *                   brand:
+ *                     type: string
+ *                     example: Nike
+ *                   madeIn:
+ *                     type: string
+ *                     example: Vietnã
+ *      responses:
+ *       201:
+ *         description: Roupa cadastrada com sucesso
+ *       500:
+ *         description: Erro interno do servidor
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: Erro interno do servidor.
+ */
+storeRoutes.post("/clothes", Auth.Authorization, storeController.createItem);
 /**
  * @swagger
  * /clothes/{id}:
@@ -127,7 +128,7 @@ storeRoutes.post("/clothes", storeController.createItem);
  *         description: Roupa deletada com sucesso
  *       400:
  *         description: Requisição mal formada (ID inválido)
- *         
+ *
  *       500:
  *         description: Erro interno do servidor
  *         content:
@@ -139,7 +140,11 @@ storeRoutes.post("/clothes", storeController.createItem);
  *                   type: string
  *                   example: Erro interno do servidor.
  */
-storeRoutes.delete("/clothes/:id", storeController.deleteItem);
+storeRoutes.delete(
+  "/clothes/:id",
+  Auth.Authorization,
+  storeController.deleteItem
+);
 /**
  * @swagger
  * /clothes/{id}:
@@ -183,14 +188,14 @@ storeRoutes.delete("/clothes/:id", storeController.deleteItem);
  *                   brand:
  *                     type: string
  *                     example: Nike
- *                   madeIn:   
+ *                   madeIn:
  *                     type: string
- *                     example: Vietnã             
+ *                     example: Vietnã
  *     responses:
  *       200:
  *         description: Roupa atualizada com sucesso
  *       400:
- *         description: Requisição mal formada         
+ *         description: Requisição mal formada
  *       500:
  *         description: Erro interno do servidor
  *         content:
@@ -202,7 +207,7 @@ storeRoutes.delete("/clothes/:id", storeController.deleteItem);
  *                   type: string
  *                   example: Erro interno do servidor.
  */
-storeRoutes.put("/clothes/:id", storeController.updateItem);
+storeRoutes.put("/clothes/:id", Auth.Authorization, storeController.updateItem);
 /**
  * @swagger
  * /clothes/{id}:
@@ -214,7 +219,7 @@ storeRoutes.put("/clothes/:id", storeController.updateItem);
  *         required: true
  *         description: ID da roupa a ser atualizada
  *         schema:
- *           type: string             
+ *           type: string
  *     responses:
  *       200:
  *         description: Item listado com sucesso
@@ -224,7 +229,7 @@ storeRoutes.put("/clothes/:id", storeController.updateItem);
  *               type: array
  *               items:
  *                 type: object
- *                 properties:        
+ *                 properties:
  *                   name:
  *                     type: string
  *                     example: Camiseta Chicago Bulls Essential Masculina
@@ -249,11 +254,11 @@ storeRoutes.put("/clothes/:id", storeController.updateItem);
  *                       brand:
  *                         type: string
  *                         example: Nike
- *                       madeIn:   
+ *                       madeIn:
  *                         type: string
  *                         example: Vietnã
  *       400:
- *         description: Requisição mal formada         
+ *         description: Requisição mal formada
  *       500:
  *         description: Erro interno do servidor
  *         content:
@@ -265,6 +270,6 @@ storeRoutes.put("/clothes/:id", storeController.updateItem);
  *                   type: string
  *                   example: Erro interno do servidor.
  */
-storeRoutes.get("/clothes/:id", storeController.getOneItem);
+storeRoutes.get("/clothes/:id", Auth.Authorization, storeController.getOneItem);
 
 export default storeRoutes;

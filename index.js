@@ -1,5 +1,6 @@
 import express from "express";
 import storeRoutes from "./routes/storeRoutes.js";
+import userRoutes from "./routes/userRoutes.js";
 //SWAGGER
 import swaggerJSDoc from "swagger-jsdoc";
 import swaggerUi from 'swagger-ui-express'
@@ -9,12 +10,17 @@ import mongoose from "./config/db-connection.js";
 //dotenv
 import dotenv from "dotenv";
 dotenv.config();
+
+
+
 //Configurando Express 
 const app = express();
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 //importar das rotas
 app.use("/", storeRoutes); 
+app.use("/", userRoutes);
+
 
 //Documentação:
 const swaggerDocs = swaggerJSDoc(swaggerOptions);
