@@ -7,7 +7,7 @@ const PASSWORD = process.env.PASSWORD;
 
 const connect = () => {
   mongoose.connect(
-    `mongodb+srv://${USER}:${PASSWORD}@cluster0.lb1dm.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`
+    `mongodb+srv://${USER}:${PASSWORD}@cluster0.79onb.mongodb.net/api-vestuario?retryWrites=true&w=majority&appName=Cluster0`
   );
 
   const connection = mongoose.connection;
