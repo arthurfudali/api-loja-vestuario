@@ -18,7 +18,7 @@ const createItem = async (req, res) => {
     // capturando valores
     const { name, type, price, description } = req.body;
     // cadastrando no banco
-    await storeService.Create(name, type, price, description);
+    await storeService.createClothes(name, type, price, description);
     res.sendStatus(201); // codigo 201 (CREATED)
   } catch (error) {
     console.log(error);
@@ -31,7 +31,7 @@ const deleteItem = async (req, res) => {
     // captura o ID pelo URL da pagina
     if (ObjectId.isValid(req.params.id)) {
       const id = req.params.id;
-      storeService.deleteGame(id);
+      storeService.deleteClothes(id);
       res.sendStatus(204); // codigo 204 (no content)
     } else {
       res.sendStatus(400); // 400 (bad request)
@@ -48,7 +48,7 @@ const updateItem = async (req, res) => {
       // Desestruturação
       //const title = req.body.title
       const { name, type, price, description } = req.body;
-      storeService.Update(id, name, type, price, description);
+      storeService.updateClothes(id, name, type, price, description);
       res.sendStatus(200); // Código 200 (OK): Requisição bem sucedida
     } else {
       res.sendStatus(400); // Código 400 (Bad Request): Requisição mal formada
@@ -63,7 +63,7 @@ const getOneItem = async (req, res) => {
   try {
     if (ObjectId.isValid(req.params.id)) {
       const id = req.params.id;
-      const item = await storeService.getOne(id);
+      const item = await storeService.getClothesById(id);
       if (!item) {
         res.sendStatus(404); // Código 404: NOT FOUND - Não encontrado
       } else {
