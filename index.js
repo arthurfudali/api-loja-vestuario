@@ -32,5 +32,6 @@ app.listen(port, (error) => {
     console.log(error);
   } else {
     console.log(`API rodando em http://localhost:${port}`);
+    console.log(`Acesse a documentação em: http://localhost:${port}/api-docs`);
   }
 });
