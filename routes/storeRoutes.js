@@ -139,7 +139,7 @@ storeRoutes.post("/clothes", storeController.createItem);
  *                   type: string
  *                   example: Erro interno do servidor.
  */
-storeRoutes.delete("/clothes:id", storeController.deleteItem);
+storeRoutes.delete("/clothes/:id", storeController.deleteItem);
 /**
  * @swagger
  * /clothes/{id}:
@@ -202,7 +202,7 @@ storeRoutes.delete("/clothes:id", storeController.deleteItem);
  *                   type: string
  *                   example: Erro interno do servidor.
  */
-storeRoutes.put("/clothes:id", storeController.updateItem);
+storeRoutes.put("/clothes/:id", storeController.updateItem);
 /**
  * @swagger
  * /clothes/{id}:
@@ -265,6 +265,6 @@ storeRoutes.put("/clothes:id", storeController.updateItem);
  *                   type: string
  *                   example: Erro interno do servidor.
  */
-storeRoutes.get("/clothes:id", storeController.getOneItem);
+storeRoutes.get("/clothes/:id", storeController.getOneItem);
 
 export default storeRoutes;
