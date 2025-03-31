@@ -4,10 +4,11 @@ dotenv.config();
 
 const USER = process.env.USER;
 const PASSWORD = process.env.PASSWORD;
+const CLUSTER = process.env.CLUSTER;
 
 const connect = () => {
   mongoose.connect(
-    `mongodb+srv://${USER}:${PASSWORD}@cluster0.79onb.mongodb.net/api-vestuario?retryWrites=true&w=majority&appName=Cluster0`
+    `mongodb+srv://${USER}:${PASSWORD}${CLUSTER}`
   );
 
   const connection = mongoose.connection;
