@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from "../config/db-connection.js";
 
 const DescriptionSchema = new mongoose.Schema({
   size: String,
