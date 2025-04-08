@@ -5,14 +5,16 @@ import userController from "../controllers/userController.js";
 const Authorization = (req, res, next) => {
   // coletar o token do cabeçalho da req
   const authToken = req.headers["authorization"]; // campo authorization do cabeçalho
-  if (authToken != undefined) {
+  console.log(`Token:::${authToken}`)
+  if (authToken) {
     // o token vem em 2 palavras, o tipo e o token em si -> 'bearer 218asidufy78' por isso é necessário um split
     const bearer = authToken.split(" ");
     const token = bearer[1];
+    console.log(`Token:::${token}`)
     // validando o token
     jwt.verify(token, userController.JWTSecret, (error, data) => {
       if (error) {
-        res.status(401).json({ error: "Token inválido" });
+        res.status(401).json({ error: `Token inválido!` });
       } else {
         req.token = token;
         req.loggedUser = {
@@ -23,7 +25,7 @@ const Authorization = (req, res, next) => {
       }
     });
   } else {
-    res.status(401).json({ error: "Token inválido." });
+    res.status(401).json({ error: `Token Não Fornecido.` });
   }
 };
 

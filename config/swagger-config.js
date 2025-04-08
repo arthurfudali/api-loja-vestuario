@@ -12,13 +12,17 @@ const swaggerOptions = {
         url: `http://localhost:${process.env.PORT || 4000}`,
       },
     ],
-    security: [
-      {
-        bearerAuth: [],
+    components: {
+      securitySchemes: {
+        bearerAuth: {
+          type: "http",
+          scheme: "bearer",
+          bearerFormat: "JWT", // Informa que o formato do token é JWT
+        },
       },
-    ],
+    },
   },
-  apis: ["./routes/*.js", "./docs/swaggerDocs.yaml",  "./controllers/*.js"], // Caminho para os arquivos que contêm as anotações Swagger
+  apis: ["./routes/*.js", "./docs/swaggerDocs.yaml", "./controllers/*.js",  "./swagger-docs/swaggerSchemas.yaml"], // Caminho para os arquivos que contêm as anotações Swagger
 };
 
 export default swaggerOptions;
