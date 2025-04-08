@@ -22,7 +22,7 @@ const swaggerOptions = {
       },
     },
   },
-  apis: ["./routes/*.js", "./docs/swaggerDocs.yaml", "./controllers/*.js",  "./swagger-docs/swaggerSchemas.yaml"], // Caminho para os arquivos que contêm as anotações Swagger
+  apis: ["./routes/*.js", "./models/*.js", "./controllers/*.js",], // Caminho para os arquivos que contêm as anotações Swagger
 };
 
 export default swaggerOptions;

@@ -9,6 +9,8 @@ import Auth from "../middleware/Auth.js";
  * @swagger
  * /clothes:
  *   get:
+ *     tags:
+ *       - Clothes
  *     summary: Listar todas as roupas do sistema
  *     security:
  *       - bearerAuth: []  # Aqui indicamos que a rota precisa de autenticação Bearer
@@ -32,62 +34,58 @@ import Auth from "../middleware/Auth.js";
  *                   type: string
  *                   example: Erro interno do servidor.
  *       401:
- *         description: Token inválido
+ *         description: Token inválido ou não fornecido
  *         content:
  *           application/json:
  *             schema:
- *               type: object
- *               properties:
- *                 error:
- *                   type: string
- *                   example: Token inválido
- * 
+ *               oneOf: 
+ *                 - type: object
+ *                   properties:
+ *                     error:
+ *                       type: string
+ *                       example: Token inválido
+ *                 - type: object
+ *                   properties:
+ *                     error:
+ *                       type: string
+ *                       example: Token não fornecido 
  */
 storeRoutes.get("/clothes", Auth.Authorization, storeController.getAllItems);
 /**
- *  @swagger
- *  /clothes:
- *    post:
+ * @swagger
+ * /clothes:
+ *   post:
+ *     tags:
+ *       - Clothes
+ *     summary: Cadastrar uma nova roupa
  *     security:
  *       - bearerAuth: []  # Aqui indicamos que a rota precisa de autenticação Bearer
- *      summary: Cadastrar uma nova roupa
- *      requestBody:
- *        required: true
- *        content:
+ *     requestBody:
+ *       required: true
+ *       content:
  *         application/json:
  *           schema:
  *             type: object
- *             properties:
- *               name:
- *                 type: string
- *                 example: Camiseta Chicago Bulls Essential Masculina
- *               type:
- *                 type: string
- *                 example: Camiseta
- *               price:
- *                 type: number
- *                 example: 218.49
- *               description:
- *                 type: object
- *                 properties:
- *                   size:
- *                     type: string
- *                     example: M
- *                   color:
- *                     type: string
- *                     example: Vermelho
- *                   material:
- *                     type: string
- *                     example: Algodão
- *                   brand:
- *                     type: string
- *                     example: Nike
- *                   madeIn:
- *                     type: string
- *                     example: Vietnã
- *      responses:
+ *             $ref: '#/components/schemas/Clothes'
+ *     responses:
  *       201:
  *         description: Roupa cadastrada com sucesso
+ *       401:
+ *         description: Token inválido ou não fornecido
+ *         content:
+ *           application/json:
+ *             schema:
+ *               oneOf: 
+ *                 - type: object
+ *                   properties:
+ *                     error:
+ *                       type: string
+ *                       example: Token inválido
+ *                 - type: object
+ *                   properties:
+ *                     error:
+ *                       type: string
+ *                       example: Token não fornecido 
  *       500:
  *         description: Erro interno do servidor
  *         content:
@@ -104,6 +102,8 @@ storeRoutes.post("/clothes", Auth.Authorization, storeController.createItem);
  * @swagger
  * /clothes/{id}:
  *   delete:
+ *     tags:
+ *       - Clothes
  *     security:
  *       - bearerAuth: []  # Aqui indicamos que a rota precisa de autenticação Bearer
  *     summary: Deletar uma roupa pelo ID
@@ -119,7 +119,22 @@ storeRoutes.post("/clothes", Auth.Authorization, storeController.createItem);
  *         description: Roupa deletada com sucesso
  *       400:
  *         description: Requisição mal formada (ID inválido)
- *
+ *       401:
+ *         description: Token inválido ou não fornecido
+ *         content:
+ *           application/json:
+ *             schema:
+ *               oneOf: 
+ *                 - type: object
+ *                   properties:
+ *                     error:
+ *                       type: string
+ *                       example: Token inválido
+ *                 - type: object
+ *                   properties:
+ *                     error:
+ *                       type: string
+ *                       example: Token não fornecido 
  *       500:
  *         description: Erro interno do servidor
  *         content:
@@ -140,6 +155,8 @@ storeRoutes.delete(
  * @swagger
  * /clothes/{id}:
  *   put:
+ *     tags:
+ *       - Clothes
  *     security:
  *       - bearerAuth: []  # Aqui indicamos que a rota precisa de autenticação Bearer
  *     summary: Atualizar os dados de um item
@@ -156,39 +173,28 @@ storeRoutes.delete(
  *         application/json:
  *           schema:
  *             type: object
- *             properties:
- *               name:
- *                 type: string
- *                 example: Camiseta Chicago Bulls Essential Masculina
- *               type:
- *                 type: string
- *                 example: Camiseta
- *               price:
- *                 type: number
- *                 example: 218.49
- *               description:
- *                 type: object
- *                 properties:
- *                   size:
- *                     type: string
- *                     example: M
- *                   color:
- *                     type: string
- *                     example: Vermelho
- *                   material:
- *                     type: string
- *                     example: Algodão
- *                   brand:
- *                     type: string
- *                     example: Nike
- *                   madeIn:
- *                     type: string
- *                     example: Vietnã
+ *             $ref: '#/components/schemas/Clothes'
  *     responses:
  *       200:
  *         description: Roupa atualizada com sucesso
  *       400:
  *         description: Requisição mal formada
+ *       401:
+ *         description: Token inválido ou não fornecido
+ *         content:
+ *           application/json:
+ *             schema:
+ *               oneOf: 
+ *                 - type: object
+ *                   properties:
+ *                     error:
+ *                       type: string
+ *                       example: Token inválido
+ *                 - type: object
+ *                   properties:
+ *                     error:
+ *                       type: string
+ *                       example: Token não fornecido 
  *       500:
  *         description: Erro interno do servidor
  *         content:
@@ -205,6 +211,8 @@ storeRoutes.put("/clothes/:id", Auth.Authorization, storeController.updateItem);
  * @swagger
  * /clothes/{id}:
  *   get:
+ *     tags:
+ *       - Clothes
  *     security:
  *       - bearerAuth: []  # Aqui indicamos que a rota precisa de autenticação Bearer
  *     summary: Buscar dados de item pelo Id
@@ -223,37 +231,25 @@ storeRoutes.put("/clothes/:id", Auth.Authorization, storeController.updateItem);
  *             schema:
  *               type: array
  *               items:
- *                 type: object
- *                 properties:
- *                   name:
- *                     type: string
- *                     example: Camiseta Chicago Bulls Essential Masculina
- *                   type:
- *                     type: string
- *                     example: Camiseta
- *                   price:
- *                     type: number
- *                     example: 218.49
- *                   description:  # Aqui estava desalinhado
- *                     type: object
- *                     properties:
- *                       size:
- *                         type: string
- *                         example: M
- *                       color:
- *                         type: string
- *                         example: Vermelho
- *                       material:
- *                         type: string
- *                         example: Algodão
- *                       brand:
- *                         type: string
- *                         example: Nike
- *                       madeIn:
- *                         type: string
- *                         example: Vietnã
+ *                 $ref: '#/components/schemas/Clothes'
  *       400:
  *         description: Requisição mal formada
+ *       401:
+ *         description: Token inválido ou não fornecido
+ *         content:
+ *           application/json:
+ *             schema:
+ *               oneOf: 
+ *                 - type: object
+ *                   properties:
+ *                     error:
+ *                       type: string
+ *                       example: Token inválido
+ *                 - type: object
+ *                   properties:
+ *                     error:
+ *                       type: string
+ *                       example: Token não fornecido 
  *       500:
  *         description: Erro interno do servidor
  *         content:
