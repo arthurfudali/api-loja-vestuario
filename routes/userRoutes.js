@@ -9,6 +9,7 @@ import userController from "../controllers/userController.js";
  *     tags:
  *       - Users
  *     summary: Cadastrar novo usuário
+ *     description: Endpoint para cadastrar novo usuário.
  *     requestBody:
  *       required: true
  *       content:
