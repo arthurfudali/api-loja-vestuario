@@ -35,7 +35,7 @@ const swaggerOptions = {
       {
         name: "ShoppingCarts",
         description:
-          "Opações de gerenciamento de carrinho de compras: Listar, adicionar Roupa, Deletar Item do Carrinho",
+          "Operações de gerenciamento de carrinho de compras: Listar, Adicionar Item, Deletar Item do Carrinho",
       },
     ],
   },
