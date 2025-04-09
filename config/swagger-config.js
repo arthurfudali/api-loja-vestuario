@@ -21,8 +21,25 @@ const swaggerOptions = {
         },
       },
     },
+    tags: [
+      {
+        name: "Users",
+        description:
+          "Operações relacionadas a usuários: cadastro, login e autenticação.",
+      },
+      {
+        name: "Clothes",
+        description:
+          "Operações de gerenciamento de roupas: listagem, criação, atualização, exclusão e busca por ID.",
+      },
+      {
+        name: "ShoppingCarts",
+        description:
+          "Operações de gerenciamento de carrinho de compras: Listar, Adicionar Item, Deletar Item do Carrinho",
+      },
+    ],
   },
-  apis: ["./routes/*.js", "./models/*.js", "./controllers/*.js",], // Caminho para os arquivos que contêm as anotações Swagger
+  apis: ["./routes/*.js", "./models/*.js", "./controllers/*.js"], // Caminho para os arquivos que contêm as anotações Swagger
 };
 
 export default swaggerOptions;

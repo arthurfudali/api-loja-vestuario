@@ -12,8 +12,6 @@ import Auth from "../middleware/Auth.js";
  *     tags:
  *       - Clothes
  *     summary: Listar todas as roupas do sistema
- *     security:
- *       - bearerAuth: []  # Aqui indicamos que a rota precisa de autenticação Bearer
  *     responses:
  *       200:
  *         description: Lista de roupas disponíveis
@@ -50,7 +48,7 @@ import Auth from "../middleware/Auth.js";
  *                       type: string
  *                       example: Token não fornecido 
  */
-storeRoutes.get("/clothes", Auth.Authorization, storeController.getAllItems);
+storeRoutes.get("/clothes", storeController.getAllItems);
 /**
  * @swagger
  * /clothes:
@@ -220,7 +218,7 @@ storeRoutes.put("/clothes/:id", Auth.Authorization, storeController.updateItem);
  *       - name: id
  *         in: path
  *         required: true
- *         description: ID da roupa a ser atualizada
+ *         description: ID da roupa
  *         schema:
  *           type: string
  *     responses:

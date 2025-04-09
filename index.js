@@ -1,6 +1,7 @@
 import express from "express";
 import storeRoutes from "./routes/storeRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
+import shoppingCartRoutes from "./routes/ShoppingCartRoutes.js";
 //SWAGGER
 import swaggerJSDoc from "swagger-jsdoc";
 import swaggerUi from 'swagger-ui-express'
@@ -20,6 +21,7 @@ app.use(express.json());
 //importar das rotas
 app.use("/", storeRoutes); 
 app.use("/", userRoutes);
+app.use("/", shoppingCartRoutes);
 
 
 //Documentação:

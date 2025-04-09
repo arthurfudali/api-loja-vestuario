@@ -10,7 +10,7 @@ import mongoose from 'mongoose';
  *         email:
  *           type: string
  *           example: "diegoMax@fatec.sp.gov.br"
- *         senha:
+ *         password:
  *           type: string
  *           example: "12345678"
  */
@@ -28,7 +28,7 @@ import mongoose from 'mongoose';
  *         email:
  *           type: string
  *           example: "diegoMax@fatec.sp.gov.br"
- *         senha:
+ *         password:
  *           type: string
  *           example: "12345678"
  */
