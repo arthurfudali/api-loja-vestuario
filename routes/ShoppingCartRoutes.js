@@ -142,6 +142,7 @@ shoppingCartRoutes.delete(
  *     tags:
  *       - ShoppingCarts
  *     summary: Retorna o carrinho de compras de um usuário
+ *      
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -160,6 +161,7 @@ shoppingCartRoutes.delete(
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/ShoppingCarts'
+ * 
  *       400:
  *         description: Requisição inválida (ID do usuário ausente ou inválido)
  *         content:
@@ -206,6 +208,7 @@ shoppingCartRoutes.delete(
  *                     error:
  *                       type: string
  *                       example: Token não fornecido
+ * 
  */
 shoppingCartRoutes.get(
   "/shoppingcart/usercart/:idUser",
