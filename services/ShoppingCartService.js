@@ -155,7 +155,10 @@ class ShoppingCartService {
       }
 
       // Busca o carrinho do usuário
-      const shoppingCart = await ShoppingCart.findOne({ user: idUser });
+      const shoppingCart = await ShoppingCart.findOne({ user: idUser })
+        .populate("clothes.clothing", "-description._id")
+        .select("clothes.quantity");        
+
       return shoppingCart;
     } catch (error) {
       console.error("Erro ao buscar carrinho:", error.message);
